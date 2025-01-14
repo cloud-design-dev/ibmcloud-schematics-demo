@@ -110,7 +110,7 @@ resource "ibm_is_instance" "tailscale" {
   }
 
   zone = local.vpc_zones[0].zone
-  keys = local.ssh_key_ids
+  keys = [data.ibm_is_ssh_key.sshkey.id]
   tags = concat(local.tags, ["zone:${local.vpc_zones[0].zone}"])
   user_data = templatefile("./ts-router.yaml", {
     tailscale_tailnet_key = tailscale_tailnet_key.lab.key
