@@ -20,6 +20,14 @@ locals {
 
 }
 
+resource "tailscale_tailnet_key" "lab" {
+  reusable      = true
+  ephemeral     = false
+  preauthorized = true
+  expiry        = 3600
+  description   = "Demo tailscale key for lab"
+}
+
 resource "random_string" "prefix" {
   count   = var.project_prefix != "" ? 0 : 1
   length  = 4
